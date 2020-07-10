@@ -1,0 +1,157 @@
+body 
+{
+    background-color: white;
+}
+
+.divPage 
+{
+    width: 960px;
+    height: 530px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+
+}
+
+.header 
+{
+    width: 960px;
+    height: 125px;
+    background-image: url(../Images/WidgetBanner.png);
+    background-repeat: no-repeat;
+}
+
+.navbar
+{
+    width: 960px;
+    height: 25px;
+    background-image: url(../Images/walterwidgetsNavigation.png);
+}
+
+.navbutton a 
+{
+    float: left;
+    width: 200px;
+    height: 25px;
+    line-height: 22px;
+    font-family: calibri;
+    font-size: 20px;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+    padding-left: 3px;
+    text-decoration: none;
+}
+
+.navbutton a:hover 
+{
+    float: left;
+    width: 200px;
+    height: 25px;
+    line-height: 22px;
+    font-family: calibri;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    text-align:center;
+    /*background-image: url(../Images/);*/
+    background-repeat: repeat-x;
+    padding-left: 1px;
+}
+
+.footer 
+{
+    width: 960px;
+    height: 25px;
+    background-image: url(../Images/walterwidgetsfooter.png);
+    background-repeat: repeat-x;
+    color: lightblue;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.bodyContent 
+{
+    width: 960px;
+    /*height: 525px;*/
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11px;
+    color: black;
+    
+}
+
+form {
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+ 
+}
+
+.row {
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    padding: 10px;
+}
+.col {
+    float: left;
+    width: 50%;
+}
+
+label {
+    width:180px;
+    /*border: solid 1px red;*/
+    clear:left;
+    text-align:right;
+    padding-right:10px;
+}
+
+input, label {
+    font-size: 15px;
+    font-weight: bold;
+    float:left;
+}
+
+#hide1, #hide2, #hide3, .hideme 
+{
+    display: none;
+}
+
+button[type=submit]
+{
+    display:inline-block;
+    width: 200px;
+    margin-left: 200px;
+    background-color: #BAACDB;
+    border: solid 1px #3E95D1;
+    color:#000000;
+    padding: 12px 32px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+
+button[type=reset]
+{
+    display:inline-block;
+    text-align: center;
+    width: 200px;
+    background-color: #BAACDB;
+    border: solid 1px #3E95D1;
+    color: #000000;
+    padding: 12px 32px;
+    text-decoration: none;
+    margin-left: 190px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold; 
+}
+
+
+
+
