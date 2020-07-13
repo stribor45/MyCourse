@@ -1,7 +1,8 @@
 <?php
    
    if (isset($_GET["my_submit"])) {
-      $rent = $_GET["rent_mortgage"];
+      $rent = htmlspecialchars($_GET["rent_mortgage"]);
+      echo $rent;
       $home = $_GET["home_phone"];
       $income = $_GET["income"];
       $cell = $_GET["cell_phone"];
@@ -28,6 +29,7 @@
       $food = "";
       $projected = ""; 
    }
+
   
 
    include ("Include/header.html");
