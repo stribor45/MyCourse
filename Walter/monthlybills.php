@@ -12,7 +12,15 @@
       $travel = trim($_POST["travel_expenses"]);
       $balance = trim($_POST["balance"]);
       $food = trim($_POST["food"]);
-      $projected = trim($_POST["projected"]);       
+      $projected = trim($_POST["projected"]);   
+
+    
+      
+      $total = $rent + $home + ($cell * $num_cell) + $hydro + $cable + $travel + $food;
+      $balance = $income - $total;
+      $projected = $balance * 12;
+
+
    }
    else {
       $rent = "";

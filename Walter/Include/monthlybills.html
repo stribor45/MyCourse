@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col">
             <label for="rent_mortgage">Rent/Mortgage</label> 
-            <input type="text" id="rent_mortgage" name="rent_mortgage" /> 
+            <input type="text" id="rent_mortgage" name="rent_mortgage" value="<?php echo $rent?>"/> 
         </div>
         <div class="col">
             <label class="hideme" for="hide1">Will Hide</label> 
@@ -15,17 +15,17 @@
     <div class="row">
         <div class="col">
             <label for="home_phone">Home Phone</label> 
-            <input type="text" id="home_phone" name="home_phone" value="<?php echo $rent?>"/> 
+            <input type="text" id="home_phone" name="home_phone" value="<?php echo $home?>"/> 
         </div>
         <div class="col">
             <label for="income">Income</label> 
-            <input type="text" id="Income" name="income" />
+            <input type="text" id="Income" name="income" value="<?php echo $income?>" />
         </div>
     </div>
     <div class="row">
         <div class="col">
             <label for="cell_phone">Cell Phone</label> 
-            <input type="text" id="cell_phone" name="cell_phone" /> 
+            <input type="text" id="cell_phone" name="cell_phone" value="<?php echo $cell?>" /> 
         </div>
         <div class="col">
             <label class="hideme" for="hide2">Will Hide</label> 
@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col">
             <label for="hydro">Hydro</label> 
-            <input type="text" id="hydro"  name="hydro" /> 
+            <input type="text" id="hydro"  name="hydro" value="<?php echo $hydro?>"/> 
         </div>
         <div class="col">
             <label for="num_cell"># of Cell Phones</label> 
@@ -45,31 +45,31 @@
     <div class="row">
         <div class="col">
             <label for="cable">Cable TV/Internet</label> 
-            <input type="text" id="cable" name="cable" /> 
+            <input type="text" id="cable" name="cable" value="<?php echo $cable?>" /> 
         </div>
         <div class="col">
             <label for="total">Total Monthly Expenses</label> 
-            <input type="text" id="total" name="total"/>
+            <input type="text" id="total" name="total" value="<?php echo $total?>" readonly />
         </div>
     </div>
     <div class="row">
         <div class="col">
             <label for="travel_expenses">Travel Expenses</label> 
-            <input type="text" id="travel_expenses" name="travel_expenses" /> 
+            <input type="text" id="travel_expenses" name="travel_expenses" value="<?php echo $travel?>"/> 
         </div>
         <div class="col">
             <label for="balance">Monthly Balance (-/+)</label> 
-            <input type="text" id="balance" name="balance" />
+            <input type="text" id="balance" name="balance" value="<?php echo $balance?>" readonly />
         </div>
     </div>
     <div class="row">
         <div class="col">
             <label for="food">Food</label> 
-            <input type="text" id="food" name="food" /> 
+            <input type="text" id="food" name="food" value="<?php echo $food?>"/> 
         </div>
         <div class="col">
             <label for="projected">Projected Yearly</label> 
-            <input type="text" id="projected" name="projected" readonly/>
+            <input type="text" id="projected" name="projected" value="<?php echo $projected?>" readonly/>
         </div>
     </div>
     <div class="row">
