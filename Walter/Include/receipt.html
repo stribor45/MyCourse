@@ -1,0 +1,46 @@
+<?php
+    $fname = $_POST["first_name"];
+    $lname = $_POST["last_name"];
+    $po = $_POST["purchase_order"];
+    $povalue = $_POST["value"];
+
+?>
+
+
+<div class="bodyContent">
+    <!-- Some Coment-->
+    <form action="" method="POST" autocomplete="off">  
+   
+        <div class="row">
+           <div class="col">
+               <label for="first_name">First Name</label> 
+               <input type="text" id="first_name" name="first_name" value = "<?php echo $fname?>"/> 
+           </div>
+        </div>
+        <div class="row">
+        <div class="col">
+            <label for="last_name">Last Name</label> 
+            <input type="text" id="last_name" name="last_name" value = "<?php echo $lname?>"/> 
+        </div>
+        </div>
+        <div class="row">
+           <div class="col">
+               <label for="purchase_order">Purchase Order #</label> 
+               <input type="text" id="purchase_order" name="purchase_order"  value = "<?php echo $po?>"/> 
+           </div>
+        </div>
+        <div class="row">
+           <div class="col">
+               <label for="value">Value</label> 
+               <input type="text" id="value"  name="value" value = "<?php echo $povalue?>"/> 
+           </div>
+        </div>
+       <!--<div class="row">
+           <div class="col">
+               <button type="submit" name="my_submit">Process</button>
+           </div>
+        </div>-->
+       <!-- value = "<?php echo $fullName?>"-->
+    </form>
+       
+</div>
