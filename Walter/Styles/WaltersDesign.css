@@ -152,6 +152,11 @@ button[type=reset]
     font-weight: bold; 
 }
 
+#hide_payroll 
+{
+    display:none;
+}
+
 
 
 
