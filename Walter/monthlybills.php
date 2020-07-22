@@ -21,7 +21,7 @@
          $projected = $balance * 12;
       }
        else {
-         echo "Am i here";
+               
          $rent = "";
          $home = "";
          $income = "";
