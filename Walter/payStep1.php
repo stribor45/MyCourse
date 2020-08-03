@@ -9,6 +9,27 @@
         $wage = $f->formatCurrency($wage, "en_CA"); 
         $gross = $f->formatCurrency($gross, "en_CA"); */
 
+        function Calcuate_Regular_Pay ($number_of_hours, $my_wage) {
+
+            $pay = $number_of_hours * $my_wage;
+            return $pay;
+
+        } //Calcuate_Regular_Pay
+
+        function Calculate_OverTime_Pay ($number_of_hours, $my_wage) {
+
+            $overtime_pay = $number_of_hours * ($my_wage * 1.5);
+            return $overtime_pay; 
+
+        } //Calculate_OverTime_Pay
+
+        function Calculate_Taxes ($pay, $tax_bracket) {
+            
+            $tax = $pay * $tax_bracket;
+            return $tax;
+
+        } //Calculate_Taxes
+
         $overtime_hours = 0;
         $payroll_tax = 0;
         $first_name = trim($_POST["first_name"]);
@@ -24,10 +45,10 @@
             $reg_hours = $hours;
         }
 
-        $regular = $reg_hours * $wage;
-        $overtime = $overtime_hours * ($wage * 1.5);
+        $regular = Calcuate_Regular_Pay ($reg_hours, $wage); //$reg_hours * $wage;
+        $overtime = Calculate_OverTime_Pay ( $overtime_hours, $wage); 
         $gross = $regular + $overtime;
-        $payroll_tax = $gross * 0.25;
+        $payroll_tax = Calculate_Taxes ($gross, 0.25);    //$gross * 0.25;
         $net_pay = $gross - $payroll_tax;
 
     }
