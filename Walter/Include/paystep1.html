@@ -29,6 +29,8 @@ $net_pay = "";         /* Net pay. */
 
         $first_name = trim($first_name);
         $last_name = trim($last_name);
+        $hours = trim($hours);
+        $wage = trim($wage);
 
         if(empty($first_name)) {
             $errors['firstNameEmpty'] = "*";
@@ -38,12 +40,15 @@ $net_pay = "";         /* Net pay. */
         }
         if(empty($hours)) {
             $errors['hoursEmpty'] = "*";
+        }
+        if(empty($wage)) {
+            $error['wageEmpty'] = "*";
         }        
         
         check_first_name($first_name, 'firstNamelength');
         check_last_name($last_name, 'lastNamelength');
         check_num_hours_worked($hours,'numberOfHours');
-
+        check_wage($wage,'wageEarned');
 
     }
     else {
@@ -111,7 +116,25 @@ $net_pay = "";         /* Net pay. */
         }
         
     } //check_num_hours_worked
-   
+
+    /* This function will validate number for wage input. It will allow submission only 
+       if input is numberic and it is bigger than 10. */
+    function check_wage ($wage, $index) {
+
+        global $errors;
+        if(!empty($wage)) {
+            if(!is_numeric($wage)) {
+                $errors['isNumeric'] = "Must be numbers"; 
+            }
+            else {
+                $wage = intval($wage);
+                if( $hours > 10) {
+                    $errors[$index] = "Must be bigger than 10 .";
+                }
+            }    
+        }
+        
+    } //check_wage   
 
 ?>
 
@@ -175,7 +198,6 @@ $net_pay = "";         /* Net pay. */
             <?php if(isset($errors['hoursEmpty'])) echo $errors['hoursEmpty'];?>					
             <?php if(isset($errors['numberOfHours'])) echo $errors['numberOfHours'];?>
             <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
-            
         </div>  
         </div>
     
@@ -184,6 +206,11 @@ $net_pay = "";         /* Net pay. */
                <label for="wage">Hourly Wage</label> 
                <input type="text" id="wage"  name="wage" value = "<?php echo $wage?>"/> 
            </div>
+           <div class="error">
+            <?php if(isset($errors['wageEmpty'])) echo $errors['wageEmpty'];?>					
+            <?php if(isset($errors['wageEarned'])) echo $errors['wageEarned'];?>
+            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+        </div> 
         </div>
         <div class="row">
             <div class="col">
