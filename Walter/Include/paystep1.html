@@ -1,5 +1,7 @@
 <?php
-echo "Herllo Igor";
+
+$errors = array();
+
 $overtime_hours = "";  /*Overtime hours. */
 $overtime = "";        /* Overtime hours pay. */
 $reg_hours = "";       /* Number of regular hours. */
@@ -7,14 +9,12 @@ $regular = "";         /* Regular hours pay. */
 $gross = "";           /* Gross pay. */
 $payroll_tax = "";     /* Payroll taxes. */
 $net_pay = "";         /* Net pay. */ 
-$check = 4;
 
-    if(isset ($_POST['my_submit'])) {
-        echo "SUBMITTED";
+
+if(isset ($_POST['my_submit'])) {
+       
 
         $f = new NumberFormatter("en", NumberFormatter::CURRENCY);
-
-        $errors = array();
 
         $overtime_hours = 0;
         $payroll_tax = 0;
@@ -66,44 +66,46 @@ $check = 4;
         check_num_hours_worked($hours,'numberOfHours');
         check_wage($wage,'wageEarned');
 
-        
-        $regular = calcuate_regular_pay ($reg_hours, $wage); //$reg_hours * $wage;
-        $overtime = Calculate_OverTime_Pay ($overtime_hours, $wage); 
-        $gross = $regular + $overtime;
-        $payroll_tax = Calculate_Taxes ($gross, 0.25);    //$gross * 0.25;
-        $net_pay = $gross - $payroll_tax;
-        $regular = display_currency($regular);
-        $overtime = display_currency($overtime);
-        $gross = display_currency($gross);
-        $payroll_tax = display_currency($payroll_tax);
-        $net_pay = display_currency($net_pay);
+        print_r($errors);
+        if (count($errors) == 0) {
+            $regular = calcuate_regular_pay ($reg_hours, $wage); //$reg_hours * $wage;
+            $overtime = Calculate_OverTime_Pay ($overtime_hours, $wage); 
+            $gross = $regular + $overtime;
+            $payroll_tax = Calculate_Taxes ($gross, 0.25);    //$gross * 0.25;
+            $net_pay = $gross - $payroll_tax;
+            $regular = display_currency($regular);
+            $overtime = display_currency($overtime);
+            $gross = display_currency($gross);
+            $payroll_tax = display_currency($payroll_tax);
+            $net_pay = display_currency($net_pay);
+        }
+       
+}
+else {
+    
+    $first_name = "";      /* Data from input field. (First name) */
+    $last_name = "";       /* Data from input field. (Last name)*/
+    $hours = "";           /* Data from input field.  (Total hours worked)*/
+    $wage = "";            /* Data from input field.  (Hourly wage) */
 
-
-    }
-    else {
-
-        $first_name = "";      /* Data from input field. (First name) */
-        $last_name = "";       /* Data from input field. (Last name)*/
-        $hours = "";           /* Data from input field.  (Total hours worked)*/
-        $wage = "";            /* Data from input field.  (Hourly wage) */
-
-
-    }
+}
 
     /* This function will validate first name input. It will allow submission only 
        if input is NOT numberic and it is NOT smaller than two characters. */
     function check_first_name ($name, $index) {
 
         global $errors;
+
         if(!empty($name)) {
             if(is_numeric($name)) {
-                $errors['isNumeric'] = "Must be letters"; 
+            
+                $errors['firstisNumeric'] = "Must be letters"; 
             }
             else {
                 if(strlen($name) < 2) {
                     $errors[$index] = "Must be at least 2 characters";
                 }
-            }    
+            }   
         }
 
     } //check_first_name
@@ -115,13 +117,14 @@ $check = 4;
         global $errors;
         if(!empty($name)) {
             if(is_numeric($name)) {
-                $errors['isNumeric'] = "Must be letters"; 
+                echo "i am inside last name";
+                $errors['lastisNumeric'] = "Must be letters"; 
             }
             else {
                 if(strlen($name) < 2 | strlen($name) > 25) {
                     $errors[$index] = "Must be at least 2 characters and not more than 25 characters.";
                 }
-            }    
+            }   
         }
         
     } //check_last_name
@@ -133,7 +136,7 @@ $check = 4;
         global $errors;
         if(!empty($hours)) {
             if(!is_numeric($hours)) {
-                $errors['isNumeric'] = "Must be numbers"; 
+                $errors['hoursisNumeric'] = "Must be numbers"; 
             }
             else {
                 $hours = intval($hours);
@@ -152,7 +155,7 @@ $check = 4;
         global $errors;
         if(!empty($wage)) {
             if(!is_numeric($wage)) {
-                $errors['isNumeric'] = "Must be numbers"; 
+                $errors['wageisNumeric'] = "Must be numbers"; 
             }
             else {
                 $wage = intval($wage);
@@ -235,7 +238,7 @@ $check = 4;
            <div class="error">
             <?php if(isset($errors['firstNameEmpty'])) echo $errors['firstNameEmpty'];?>					
             <?php if(isset($errors['firstNamelength'])) echo $errors['firstNamelength'];?>
-            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            <?php if(isset($errors['firstisNumeric'])) echo $errors['firstisNumeric'];?>
             
         </div>
         </div>
@@ -247,7 +250,7 @@ $check = 4;
         <div class="error">
             <?php if(isset($errors['lastNameEmpty'])) echo $errors['lastNameEmpty'];?>					
             <?php if(isset($errors['lastNamelength'])) echo $errors['lastNamelength'];?>
-            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            <?php if(isset($errors['lastisNumeric'])) echo $errors['lastisNumeric'];?>
             
         </div>
         </div>
@@ -259,7 +262,7 @@ $check = 4;
            <div class="error">
             <?php if(isset($errors['hoursEmpty'])) echo $errors['hoursEmpty'];?>					
             <?php if(isset($errors['numberOfHours'])) echo $errors['numberOfHours'];?>
-            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            <?php if(isset($errors['hoursisNumeric'])) echo $errors['hoursisNumeric'];?>
         </div>  
         </div>
     
@@ -271,49 +274,49 @@ $check = 4;
            <div class="error">
             <?php if(isset($errors['wageEmpty'])) echo $errors['wageEmpty'];?>					
             <?php if(isset($errors['wageEarned'])) echo $errors['wageEarned'];?>
-            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            <?php if(isset($errors['wageisNumeric'])) echo $errors['wageisNumeric'];?>
         </div> 
         </div>
         <div class="row">
             <div class="col">
                 <label for="wage">Overtime Hours</label> 
-                <input type="text" id="over_hours"  name="over_hours" value = "<?php echo $overtime_hours?>"/> 
+                <input type="text" id="over_hours"  name="over_hours" value = "<?php if(isset($overtime_hours) && count($errors) == 0 ) { echo $overtime_hours;} ?>" /> 
             </div>
         </div> 
         <div class="row">
             <div class="col">
                 <label for="wage">Overtime Hours Pay</label> 
-                <input type="text" id="over_pay"  name="over_pay" value = "<?php echo $overtime?>"/> 
+                <input type="text" id="over_pay"  name="over_pay" value = "<?php if(isset($overtime) && count($errors) == 0 ) { echo $overtime;} ?>" /> 
             </div>
         </div>  
         <div class="row">
             <div class="col">
                 <label for="wage">Regular Hours</label> 
-                <input type="text" id="reg_hours"  name="reg_hours" value = "<?php echo $reg_hours?>"/> 
+                <input type="text" id="reg_hours"  name="reg_hours" value = "<?php if(isset($reg_hours) && count($errors) == 0 ) { echo $reg_hours;} ?>"/> 
             </div>
         </div> 
         <div class="row">
             <div class="col">
                 <label for="wage">Regular Hours Pay</label> 
-                <input type="text" id="reg_pay"  name="reg_pay" value = "<?php echo $regular?>"/> 
+                <input type="text" id="reg_pay"  name="reg_pay" value = "<?php if(isset($regular) && count($errors) == 0 ) { echo $regular; } ?>"/> 
             </div>
         </div>  
         <div class="row">
             <div class="col">
                 <label for="gross">Gross Pay</label> 
-                <input type="text" id="gross"  name="gross" value = "<?php echo $gross?>"/> 
+                <input type="text" id="gross"  name="gross" value = "<?php if(isset($gross) && count($errors) == 0 ) { echo $gross;} ?>" /> 
             </div>
         </div>
         <div id="payroll" class="row">
             <div class="col">
                 <label for="payroll">Payroll Tax</label> 
-                <input type="text" id="payroll"  name="payroll" value = "<?php echo $payroll_tax?>"/> 
+                <input type="text" id="payroll"  name="payroll" value = "<?php if(isset($payroll_tax) && count($errors) == 0 ) { echo $payroll_tax;} ?>" /> 
             </div>
         </div>
         <div id="net_pay" class="row">
             <div class="col">
                 <label for="net_pay">Net Pay</label> 
-                <input type="text" id="net_pay"  name="net_pay" value = "<?php echo $net_pay?>"/> 
+                <input type="text" id="net_pay"  name="net_pay" value = "<?php if(isset($net_pay) && count($errors) == 0 ) { echo $net_pay;} ?>"/> 
             </div>
         </div>  
         <div class="row">
