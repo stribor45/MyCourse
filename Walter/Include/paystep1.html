@@ -1,6 +1,5 @@
 <?php
-
-
+echo "Herllo Igor";
 $overtime_hours = "";  /*Overtime hours. */
 $overtime = "";        /* Overtime hours pay. */
 $reg_hours = "";       /* Number of regular hours. */
@@ -8,11 +7,17 @@ $regular = "";         /* Regular hours pay. */
 $gross = "";           /* Gross pay. */
 $payroll_tax = "";     /* Payroll taxes. */
 $net_pay = "";         /* Net pay. */ 
+$check = 4;
 
     if(isset ($_POST['my_submit'])) {
+        echo "SUBMITTED";
+
+        $f = new NumberFormatter("en", NumberFormatter::CURRENCY);
 
         $errors = array();
 
+        $overtime_hours = 0;
+        $payroll_tax = 0;
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $hours =  $_POST['num_hours'];
@@ -32,6 +37,17 @@ $net_pay = "";         /* Net pay. */
         $hours = trim($hours);
         $wage = trim($wage);
 
+
+
+        If ($hours > 40) {
+            $reg_hours = 40;
+            $overtime_hours = $hours - 40;
+        }
+        else {
+            $reg_hours = $hours;
+        }
+
+
         if(empty($first_name)) {
             $errors['firstNameEmpty'] = "*";
         }
@@ -42,13 +58,26 @@ $net_pay = "";         /* Net pay. */
             $errors['hoursEmpty'] = "*";
         }
         if(empty($wage)) {
-            $error['wageEmpty'] = "*";
+            $errors['wageEmpty'] = "*";
         }        
         
         check_first_name($first_name, 'firstNamelength');
         check_last_name($last_name, 'lastNamelength');
         check_num_hours_worked($hours,'numberOfHours');
         check_wage($wage,'wageEarned');
+
+        
+        $regular = calcuate_regular_pay ($reg_hours, $wage); //$reg_hours * $wage;
+        $overtime = Calculate_OverTime_Pay ($overtime_hours, $wage); 
+        $gross = $regular + $overtime;
+        $payroll_tax = Calculate_Taxes ($gross, 0.25);    //$gross * 0.25;
+        $net_pay = $gross - $payroll_tax;
+        $regular = display_currency($regular);
+        $overtime = display_currency($overtime);
+        $gross = display_currency($gross);
+        $payroll_tax = display_currency($payroll_tax);
+        $net_pay = display_currency($net_pay);
+
 
     }
     else {
@@ -57,7 +86,6 @@ $net_pay = "";         /* Net pay. */
         $last_name = "";       /* Data from input field. (Last name)*/
         $hours = "";           /* Data from input field.  (Total hours worked)*/
         $wage = "";            /* Data from input field.  (Hourly wage) */
-
 
 
     }
@@ -128,13 +156,47 @@ $net_pay = "";         /* Net pay. */
             }
             else {
                 $wage = intval($wage);
-                if( $hours > 10) {
+                if( $wage <= 10) {
                     $errors[$index] = "Must be bigger than 10 .";
                 }
             }    
         }
         
     } //check_wage   
+    
+    /* This function will calculate regular pay. */
+    function calcuate_regular_pay ($number_of_hours, $my_wage) {
+
+        $pay = $number_of_hours * $my_wage;
+        return $pay;
+
+    } //calculate_regular_pay
+    
+    /* This function will calculate overtime pay. */
+    function calculate_overtime_pay ($number_of_hours, $my_wage) {
+
+        $overtime_pay = $number_of_hours * ($my_wage * 1.5);
+        return $overtime_pay; 
+
+    } //calculate_overtime_pay
+    
+    /* This function will calculate taxes. */
+    function calculate_taxes ($pay, $tax_bracket) {
+            
+        $tax = $pay * $tax_bracket;
+        return $tax;
+    
+    } //calcuate_taxes
+
+    /* This function will convert variable to display as currency. */
+    function display_currency ($number){
+
+        global $f;
+        $number = number_format($number, 2, '.', '');
+     
+        return $f->formatCurrency($number, "USD");
+    
+    } //display_currency
 
 ?>
 
