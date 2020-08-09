@@ -45,6 +45,7 @@ if(isset ($_POST['my_submit'])) {
         }
         else {
             $reg_hours = $hours;
+            $overtime_hours = 0;
         }
 
 
@@ -66,7 +67,6 @@ if(isset ($_POST['my_submit'])) {
         check_num_hours_worked($hours,'numberOfHours');
         check_wage($wage,'wageEarned');
 
-        print_r($errors);
         if (count($errors) == 0) {
             $regular = calcuate_regular_pay ($reg_hours, $wage); //$reg_hours * $wage;
             $overtime = Calculate_OverTime_Pay ($overtime_hours, $wage); 
@@ -78,11 +78,15 @@ if(isset ($_POST['my_submit'])) {
             $gross = display_currency($gross);
             $payroll_tax = display_currency($payroll_tax);
             $net_pay = display_currency($net_pay);
+            $wage = display_currency ($wage);
+            $hours = number_format($hours, 2, '.', '');
+            $overtime_hours = number_format($overtime_hours, 2, '.', '');
+            $reg_hours = number_format($reg_hours, 2, '.', ''); 
         }
        
 }
 else {
-    
+
     $first_name = "";      /* Data from input field. (First name) */
     $last_name = "";       /* Data from input field. (Last name)*/
     $hours = "";           /* Data from input field.  (Total hours worked)*/
@@ -202,7 +206,6 @@ else {
     } //display_currency
 
 ?>
-
 
 
 <div class="bodyContent">
