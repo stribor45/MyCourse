@@ -86,7 +86,6 @@ $net_pay = "";         /* Net pay. */
             }
             else {
                 if(strlen($name) < 2 | strlen($name) > 25) {
-                    echo "I am inside less than 2 and bigger 25";
                     $errors[$index] = "Must be at least 2 characters and not more than 25 characters.";
                 }
             }    
@@ -106,7 +105,6 @@ $net_pay = "";         /* Net pay. */
             else {
                 $hours = intval($hours);
                 if( $hours > 60) {
-                    echo "I am inside less than 2 and bigger 25";
                     $errors[$index] = "Must be less or equal to 60 .";
                 }
             }    
