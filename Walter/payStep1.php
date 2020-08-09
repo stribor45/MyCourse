@@ -1,35 +1,33 @@
 <?php
 
-
+/*
     if (isset($_POST["my_submit"])) {
 
         $step2 = 1; //if 1 output withing the form and if 0 output just to blank page
-        /*$f = new NumberFormatter("en", NumberFormatter::CURRENCY);
+        $f = new NumberFormatter("en", NumberFormatter::CURRENCY);
         $wage = $f->formatCurrency($w, "USD"); 
-        $wage = $f->formatCurrency($wage, "en_CA"); 
-        $gross = $f->formatCurrency($gross, "en_CA"); */
+        $wage = $f->formatCurrency($wage, "en_CA");
 
         function Calcuate_Regular_Pay ($number_of_hours, $my_wage) {
 
             $pay = $number_of_hours * $my_wage;
             return $pay;
 
-        } //Calcuate_Regular_Pay
+        } 
 
         function Calculate_OverTime_Pay ($number_of_hours, $my_wage) {
 
             $overtime_pay = $number_of_hours * ($my_wage * 1.5);
             return $overtime_pay; 
 
-        } //Calculate_OverTime_Pay
+        } 
 
         function Calculate_Taxes ($pay, $tax_bracket) {
             
             $tax = $pay * $tax_bracket;
             return $tax;
 
-        } //Calculate_Taxes
-
+        } 
         $overtime_hours = 0;
         $payroll_tax = 0;
         $first_name = trim($_POST["first_name"]);
@@ -61,7 +59,7 @@
         $payroll = "";
         $net_pay = "";
     }  
-
+*/
 
     include ("Include/header.html");
     include ("Include/navigation.html");

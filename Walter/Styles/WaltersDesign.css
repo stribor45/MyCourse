@@ -92,18 +92,28 @@ form {
 
 .row {
     background: #f6f6f6;
-    border: 1px solid #ccc;
+    border: 1px solid red;
     overflow: hidden;
     padding: 10px;
 }
 .col {
+    border: 1px solid green;
     float: left;
-    width: 50%;
+    width: 43%;
+}
+
+.error 
+{
+    border:1px solid purple;
+    font-size: 16px;
+    color: #f80a1e;
+    font-weight: bold;
+    padding-top: 2px;
 }
 
 label {
     width:180px;
-    /*border: solid 1px red;*/
+    border: 1px solid blue;
     clear:left;
     text-align:right;
     padding-right:10px;
@@ -115,10 +125,12 @@ input, label {
     float:left;
 }
 
-#hide1, #hide2, #hide3, .hideme 
+/*#hide1, #hide2, #hide3, .hideme 
 {
     display: none;
-}
+}*/
+
+
 
 button[type=submit]
 {

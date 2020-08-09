@@ -1,3 +1,124 @@
+<?php
+
+
+$overtime_hours = "";  /*Overtime hours. */
+$overtime = "";        /* Overtime hours pay. */
+$reg_hours = "";       /* Number of regular hours. */
+$regular = "";         /* Regular hours pay. */
+$gross = "";           /* Gross pay. */
+$payroll_tax = "";     /* Payroll taxes. */
+$net_pay = "";         /* Net pay. */ 
+
+    if(isset ($_POST['my_submit'])) {
+
+        $errors = array();
+
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $hours =  $_POST['num_hours'];
+        $wage = $_POST['wage'];
+
+        $overtime_hours = "";  /*Overtime hours. */
+        $overtime = "";        /* Overtime hours pay. */
+        $reg_hours = "";       /* Number of regular hours. */
+        $regular = "";         /* Regular hours pay. */
+        $gross = "";           /* Gross pay. */
+        $payroll_tax = "";     /* Payroll taxes. */
+        $net_pay = "";         /* Net pay. */ 
+    
+
+        $first_name = trim($first_name);
+        $last_name = trim($last_name);
+
+        if(empty($first_name)) {
+            $errors['firstNameEmpty'] = "*";
+        }
+        if(empty($last_name)) {
+            $errors['lastNameEmpty'] = "*";
+        }
+        if(empty($hours)) {
+            $errors['hoursEmpty'] = "*";
+        }        
+        
+        check_first_name($first_name, 'firstNamelength');
+        check_last_name($last_name, 'lastNamelength');
+        check_num_hours_worked($hours,'numberOfHours');
+
+
+    }
+    else {
+
+        $first_name = "";      /* Data from input field. (First name) */
+        $last_name = "";       /* Data from input field. (Last name)*/
+        $hours = "";           /* Data from input field.  (Total hours worked)*/
+        $wage = "";            /* Data from input field.  (Hourly wage) */
+
+
+
+    }
+
+    /* This function will validate first name input. It will allow submission only 
+       if input is NOT numberic and it is NOT smaller than two characters. */
+    function check_first_name ($name, $index) {
+
+        global $errors;
+        if(!empty($name)) {
+            if(is_numeric($name)) {
+                $errors['isNumeric'] = "Must be letters"; 
+            }
+            else {
+                if(strlen($name) < 2) {
+                    $errors[$index] = "Must be at least 2 characters";
+                }
+            }    
+        }
+
+    } //check_first_name
+
+    /* This function will validate last name input. It will allow submission only 
+       if input is NOT numberic and it is NOT smaller than two characters and NOT bigger than 25 characters. */
+    function check_last_name ($name, $index) {
+
+        global $errors;
+        if(!empty($name)) {
+            if(is_numeric($name)) {
+                $errors['isNumeric'] = "Must be letters"; 
+            }
+            else {
+                if(strlen($name) < 2 | strlen($name) > 25) {
+                    echo "I am inside less than 2 and bigger 25";
+                    $errors[$index] = "Must be at least 2 characters and not more than 25 characters.";
+                }
+            }    
+        }
+        
+    } //check_last_name
+
+    /* This function will validate number of hours worked input. It will allow submission only 
+       if input is numberic and it is NOT bigger than 60. */
+    function check_num_hours_worked ($hours, $index) {
+
+        global $errors;
+        if(!empty($hours)) {
+            if(!is_numeric($hours)) {
+                $errors['isNumeric'] = "Must be numbers"; 
+            }
+            else {
+                $hours = intval($hours);
+                if( $hours > 60) {
+                    echo "I am inside less than 2 and bigger 25";
+                    $errors[$index] = "Must be less or equal to 60 .";
+                }
+            }    
+        }
+        
+    } //check_num_hours_worked
+   
+
+?>
+
+
+
 <div class="bodyContent">
     <!-- This is the form that will present the user with following input field
         First Name
@@ -21,18 +142,30 @@
     -->
 
 
-    <form action="payStep1.php" method="POST" autocomplete="off">  
+    <form action="" method="POST" autocomplete="off">  
    
         <div class="row">
            <div class="col">
                <label for="first_name">First Name</label> 
                <input type="text" id="first_name" name="first_name"  value = "<?php echo $first_name?>"/> 
            </div>
+           <div class="error">
+            <?php if(isset($errors['firstNameEmpty'])) echo $errors['firstNameEmpty'];?>					
+            <?php if(isset($errors['firstNamelength'])) echo $errors['firstNamelength'];?>
+            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            
+        </div>
         </div>
         <div class="row">
         <div class="col">
             <label for="last_name">Last Name</label> 
             <input type="text" id="last_name" name="last_name" value = "<?php echo $last_name?>"/> 
+        </div>
+        <div class="error">
+            <?php if(isset($errors['lastNameEmpty'])) echo $errors['lastNameEmpty'];?>					
+            <?php if(isset($errors['lastNamelength'])) echo $errors['lastNamelength'];?>
+            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            
         </div>
         </div>
         <div class="row">
@@ -40,7 +173,14 @@
                <label for="num_hours">Number of hours</label> 
                <input type="text" id="num_hours" name="num_hours" value = "<?php echo $hours?>"/> 
            </div>
+           <div class="error">
+            <?php if(isset($errors['hoursEmpty'])) echo $errors['hoursEmpty'];?>					
+            <?php if(isset($errors['numberOfHours'])) echo $errors['numberOfHours'];?>
+            <?php if(isset($errors['isNumeric'])) echo $errors['isNumeric'];?>
+            
+        </div>  
         </div>
+    
         <div class="row">
            <div class="col">
                <label for="wage">Hourly Wage</label> 
