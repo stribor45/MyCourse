@@ -126,7 +126,7 @@ else {
             }
             else {
                 if(strlen($name) < 2 | strlen($name) > 25) {
-                    $errors[$index] = "Must be at least 2 characters and not more than 25 characters.";
+                    $errors[$index] = "Must be at least 2 characters and not more than 25 characters";
                 }
             }   
         }
@@ -145,7 +145,7 @@ else {
             else {
                 $hours = intval($hours);
                 if( $hours > 60) {
-                    $errors[$index] = "Must be less or equal to 60 .";
+                    $errors[$index] = "Must be less or equal to 60";
                 }
             }    
         }
@@ -164,7 +164,7 @@ else {
             else {
                 $wage = intval($wage);
                 if( $wage <= 10) {
-                    $errors[$index] = "Must be bigger than 10 .";
+                    $errors[$index] = "Must be bigger than 10";
                 }
             }    
         }
@@ -210,24 +210,13 @@ else {
 
 <div class="bodyContent">
     <!-- This is the form that will present the user with following input field
-        First Name
-        Last Name
-        Number of hours worked
-        Hourly Wage
+        First Name - user entered
+        Last Name - user entered
+        Number of hours worked - user entered
+        Hourly Wage - user entered
         Gross earned
         Payroll Tax
         Net Pay
-        asdded this to see if Linux will take this update
-        I have to add validation for
-        All Inputs (first name, last name, hourly wage and hours workd) must be entered.
-        First Name can not have a length less than 2 characters
-        Last Name cannot have a length less than 2 characters and cannot be more than 25
-        Hourly wage must be greater than 10.00 and can only be numeric
-        Hours worked can not exceed more than 60 hours for any given work period and must be numeric
-        Added this to see if Windows will take the update
-        added to see if Linux can see this update
-        Added to see If Windows will see this update.
-       
     -->
 
 
